@@ -5,7 +5,7 @@ MAINTAINER SUPSS <supss@serpro.gov.br>
 ENV JBOSS_FOLDER=jboss-eap-6.4
 ENV JBOSS_FILE=${JBOSS_FOLDER}.0.zip
 #ENV JBOSS_URL=http://nexus.aic.serpro/service/local/repositories/componentes-corporativos/content/tiamat/jboss-eap/6.4.0/jboss-eap-6.4.0.zip
-ENV JBOSS_URL=/opt/jboss-eap-6.4.0.zip
+ENV JBOSS_URL="/opt/jboss-eap-6.4.0.zip"
 
 ENV JBOSS_BASE_FOLDER=JBOSS-BASE
 
