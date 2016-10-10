@@ -1,19 +1,16 @@
-FROM java:openjdk-8-alpine
+FROM openjdk:alpine
 
 MAINTAINER SUPSS <supss@serpro.gov.br>
 
-#ENV JBOSS_URL=http://nexus.aic.serpro/service/local/repositories/componentes-corporativos/content/tiamat/jboss-eap/6.4.0/jboss-eap-6.4.0.zip
-ENV JBOSS_INSTALL_PACKAGE=jboss-eap-6.4.0.zip
+ADD jboss-eap-6.4.zip /jboss-eap-6.4.zip
+RUN unzip /jboss-eap-6.4.zip
 
-ENV JBOSS_BASE_FOLDER=/opt/jboss
+
+#RUN wget http://nexus.aic.serpro/service/local/repositories/componentes-corporativos/content/tiamat/jboss-eap/6.4.0/jboss-eap-6.4.0.zip && \
+#    unzip /jboss-eap-6.4.0.zip \
+#    rm /jboss-eap-6.4.0.zip
 
 EXPOSE 8080
+ENTRYPOINT ["/jboss-eap-6.4/bin/standalone.sh", "-b", "0.0.0.0"]
 
-COPY $JBOSS_INSTALL_PACKAGE /$JBOSS_BASE_FOLDER
-
-
-RUN unzip jboss-eap-6.4.0 -d $JBOSS_BASE_FOLDER 
-
-ENTRYPOINT ["$JBOSS_BASE_FOLDER/bin/standalone.sh", "-b", "0.0.0.0"]
-
-COPY demoiselle-docker.war $JBOSS_BASE_FOLDER/standalone/deployment
+ADD demoiselle-docker.war /jboss-eap-6.4/standalone/deployments
